@@ -1,0 +1,31 @@
+# input
+inputs:
+  data: ./files/AO2D_pp_341825_mergedDF.root
+  fTreeDmeson: DF_2261906152150656/O2hfcharmcandlite
+
+# cuts
+bdt_bkg_bins: [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.001]
+bdt_sgn_bins: [0., 0., 0., 0., 0., 0., 0., 0., 0.]
+pt_mins: [0, 2, 4, 6, 8, 10, 12, 24] #, 0.7, 1.0, 1.5]
+pt_maxs: [2, 4, 6, 8, 10, 12, 24, 36] #, 1.0, 1.5, 2.0]
+cuts:
+  key: Null # key to be used for the cuts, if None, the cuts are not applied
+  bins_min: [0, 0, 0, 0, 0, 0, 0, 0] #, 0, 0, 0]
+  bins_max: [0.001, 0.1, 0.08, 0.001, 0.001, 0.001, 0.001, 0.001] #, 0.001, 0.001, 0.001]
+cent_bins: [0, 100]
+occ_bins: [ 
+            [0, 5000],
+            [0, 6000],
+          ]
+
+# fit
+fit_config:
+  sgn_func: "gaussian"
+  bkg_func: "expo"
+  mean: 1.87
+  sigma: 0.08
+
+# output
+output:
+  dir: ./output
+  suffix: "PP_22Pass7"
