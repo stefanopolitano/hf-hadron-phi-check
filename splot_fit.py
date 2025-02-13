@@ -1,15 +1,11 @@
 
 import argparse
-import sys
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = ""  # pylint: disable=wrong-import-position
-import pandas as pd
 import numpy as np
 import uproot as up
 import seaborn as sns
 import matplotlib.pyplot as plt
-from concurrent.futures import ProcessPoolExecutor
-import itertools
 from flarefly.data_handler import DataHandler
 from flarefly.fitter import F2MassFitter
 import yaml
@@ -65,7 +61,6 @@ def fit_mass(df, suffix, pt_min, pt_max, cfg, sub_dir):
     sgn_func = [cfg["fit_config"]["sgn_func"]] if cfg["fit_config"].get('sgn_func') else ["doublecb"]
     bkg_func = [cfg["fit_config"]["bkg_func"]] if cfg["fit_config"].get('bkg_func') else ["nobkg"]
     fitter_name = f"{sub_dir.split('/')[0]}_{suffix}_pt_{pt_min}_{pt_max}"
-    
 
     fitter = F2MassFitter(data_handler, sgn_func, bkg_func, verbosity=0, name=fitter_name)
     fitter.set_signal_initpar(0, "mu", cfg["fit_config"]["mean"])
@@ -85,7 +80,7 @@ def fit_mass(df, suffix, pt_min, pt_max, cfg, sub_dir):
                )
 
     loc = ["lower left", "upper left"]
-    ax_title = "phi (rad)"
+    ax_title = '$\mathit{M}$ (K$\pi\pi$) (GeV/$\mathit{c}^{2})$'
 
     fig, _ = fitter.plot_mass_fit(
         style="ATLAS",
@@ -115,6 +110,8 @@ def process(cfg_file_name):
 
     pt_mins = cfg["pt_mins"]
     pt_maxs = cfg["pt_maxs"]
+    mass_mins = cfg["mass_mins"] if cfg.get('mass_mins') else [-9999 for i in range(len(pt_mins))]
+    mass_maxs = cfg["mass_maxs"] if cfg.get('mass_maxs') else [+9999 for i in range(len(pt_mins))]
     cent_bins = cfg["cent_bins"]
     bdt_bkg_bins = cfg["bdt_bkg_bins"]
     bdt_sgn_bins = cfg["bdt_sgn_bins"]
@@ -141,13 +138,15 @@ def process(cfg_file_name):
         #selection = f'{cent_min} < fCentralityFT0C < {cent_max} and '
         selection = ''
         
-        for _, (pt_min, pt_max, bkg_max, sig_min, cut_min, cut_max) in enumerate(zip(pt_mins,
-                                                                                     pt_maxs,
-                                                                                     bdt_bkg_bins,
-                                                                                     bdt_sgn_bins,
-                                                                                     cuts_mins,
-                                                                                     cuts_maxs)):
-            selection += f'0 < fMlScoreBkg < {bkg_max} and {sig_min} < fMlScoreNonPrompt < 1 and {pt_min} < fPt < {pt_max}'
+        for _, (pt_min, pt_max, mass_min, mass_max, bkg_max, sig_min, cut_min, cut_max) in enumerate(zip(pt_mins,
+                                                                                                         pt_maxs,
+                                                                                                         mass_mins,
+                                                                                                         mass_maxs,
+                                                                                                         bdt_bkg_bins,
+                                                                                                         bdt_sgn_bins,
+                                                                                                         cuts_mins,
+                                                                                                         cuts_maxs)):
+            selection += f'0 < fMlScoreBkg < {bkg_max} and {sig_min} < fMlScoreNonPrompt < 1 and {pt_min} < fPt < {pt_max} and {mass_min} < fM < {mass_max}'
             if cfg['cuts'].get('key') is not None:
                 selection += f' and {cfg["cuts"]["key"]} > {cut_min} and {cfg["cuts"]["key"]} < {cut_max}'
             print(f"Selection: {selection}")

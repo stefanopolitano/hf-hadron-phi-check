@@ -1,0 +1,8 @@
+Failed fit configurations
+cent_0_100_0 < fMlScoreBkg < 0.004 and 0.01 < fMlScoreNonPrompt < 1 and 0 < fPt < 2 and 1.7 < fM < 2.05_pt_0_2: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.004 and 0.01 < fMlScoreNonPrompt < 1 and 2 < fPt < 4 and 1.7 < fM < 2.05_pt_2_4: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.008 and 0.01 < fMlScoreNonPrompt < 1 and 4 < fPt < 6 and 1.7 < fM < 1.98_pt_4_6: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.018 and 0.01 < fMlScoreNonPrompt < 1 and 6 < fPt < 8 and 1.7 < fM < 1.98_pt_6_8: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.015 and 0.01 < fMlScoreNonPrompt < 1 and 8 < fPt < 10 and 1.7 < fM < 1.98_pt_8_10: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.03 and 0.01 < fMlScoreNonPrompt < 1 and 10 < fPt < 12 and 1.7 < fM < 2.05_pt_10_12: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
+cent_0_100_0 < fMlScoreBkg < 0.08 and 0.01 < fMlScoreNonPrompt < 1 and 12 < fPt < 24 and 1.7 < fM < 2.05_pt_12_24: fit_res.valid -> True, fit_res.status -> 0, fit_res.converged -> True, sweights computed -> True 
