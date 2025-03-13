@@ -157,6 +157,7 @@ def process(cfg_file_name):
             
             # fit
             fit_mass(df_sel, selection, pt_min, pt_max, cfg, out_dir)
+            df_sel.to_parquet(os.path.join(out_dir_path, f'{out_dir}/df_sel.parquet'), engine='pyarrow', index=False)
 
             # plot
             plot_distribution(df_sel, 'fPhi').savefig(
