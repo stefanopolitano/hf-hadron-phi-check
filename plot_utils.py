@@ -289,7 +289,7 @@ def GetCanvas(name, axisname, xmin=0.4, xmax=40, ymin=-0.20, ymax=0.62):
 
     return canv, hframe
 
-def GetCanvas3sub(name, axisname):
+def GetCanvas3sub(name, axisname, ymin=-0.015, ymax=0.015, xmin=0, xmax=6.34):
     """
     Creates a canvas with three adjacent subpads sharing the y-axis.
     
@@ -309,7 +309,7 @@ def GetCanvas3sub(name, axisname):
         pad.SetLeftMargin(0.18 if i == 0 else 0.0)  # First pad has a y-axis margin
         pad.SetRightMargin(0.05 if i == 2 else 0.0) # Last pad has right margin
         
-        frame = pad.DrawFrame(-0.5, -0.20, 40, 0.62, axisname)
+        frame = pad.DrawFrame(xmin, ymin, xmax, ymax, axisname)
         frame.SetTitle("")
         
         if i > 0:
